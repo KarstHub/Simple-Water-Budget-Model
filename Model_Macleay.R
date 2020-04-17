@@ -85,8 +85,6 @@
                               ifelse(Data[i,7]==1 && Data[(i+1),7]==0 
                                      && max(Data[(i-6):i,4])==0, -1, 0))
         }
-        # Number of simulated events
-        NuSimEvents <- sum(Data$SimulatedRechargeEventsDuringObservationPeriod, na.rm = T)
         # Missmatches  (simulated but not observed events)
         Data$Missmatches <- NA
         for (i in which(Data$Date==dmy("01.07.2014")):which(Data$Date==dmy("01.07.2019"))) {
@@ -104,7 +102,7 @@
 
     # Create a list as output
     result <- list(Data$RechargeTotal_mmd, Data$Matches, Data$Missmatches, 
-                   NuObsEvents, NuSimEvents, NuMatches, NuMissmatches)
+                   NuObsEvents, NuMatches, NuMissmatches)
     return(result)
     } 
 
@@ -113,13 +111,13 @@
 #------------------------------------------------------------------------------------------------------------------------------------------------------
   # Lower Macleay
   Lower_Macleay_Model <- Macleay(Lower_Macleay, Overflow_Lower_Macleay, dailyDrain_Lower_Macleay)
-  cat(paste0("Results Lower Macleay", "\n", "Observed Events: ", Lower_Macleay_Model[[4]], "\n", "Simulated Events: ", Lower_Macleay_Model[[5]], "\n",
-             "Number of Matches: ", Lower_Macleay_Model[[6]], "\n", "Number of Missmatches: ", Lower_Macleay_Model[[7]], "\n"))
+  cat(paste0("Results Lower Macleay", "\n", "Observed Events: ", Lower_Macleay_Model[[4]], "\n",
+             "Number of Matches: ", Lower_Macleay_Model[[5]], "\n", "Number of Missmatches: ", Lower_Macleay_Model[[6]], "\n"))
 
   # Upper Macleay
   Upper_Macleay_Model <- Macleay(Upper_Macleay, Overflow_Upper_Macleay, dailyDrain_Upper_Macleay)
-  cat(paste0("Results Upper Macleay", "\n", "Observed Events: ", Upper_Macleay_Model[[4]], "\n", "Simulated Events: ", Upper_Macleay_Model[[5]], "\n",
-             "Number of Matches: ", Upper_Macleay_Model[[6]], "\n", "Number of Missmatches: ", Upper_Macleay_Model[[7]], "\n"))
+  cat(paste0("Results Upper Macleay", "\n", "Observed Events: ", Upper_Macleay_Model[[4]], "\n",
+             "Number of Matches: ", Upper_Macleay_Model[[5]], "\n", "Number of Missmatches: ", Upper_Macleay_Model[[6]], "\n"))
   
 #------------------------------------------------------------------------------------------------------------------------------------------------------
 # Output
