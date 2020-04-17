@@ -58,19 +58,19 @@
   Macleay <- function(Data,Overflow,dailyDrain) {
     
         # Soil and Epikarst Storage
-        Data$SoilEpikarstStorage_mm<- NA
+        Data$SoilEpikarstStorage_mm <- NA
         Data[1,5] <- 0
         for (i in 2:nrow(Data)) {
           Data[i,5] <- max(min((Data[(i-1),5]+Data[i,2]-Data[i,3]-dailyDrain), Overflow, na.rm=T), 0)
         }
         # Total Recharge
-        Data$RechargeTotal_mmd<- NA
+        Data$RechargeTotal_mmd <- NA
         Data[1,6] <- 0
         for (i in 2:nrow(Data)) {
           Data[i,6] <- max((Data[(i-1),5]+Data[i,2]-Data[i,3]-Overflow-dailyDrain), 0, na.rm=T)
         }
         # Simulated recharge with Buffer (7d)
-        Data$SimulatedRechargeWithBuffer<- NA
+        Data$SimulatedRechargeWithBuffer <- NA
         Data[1:7,7] <- 0
         Data[(nrow(Data)-3):nrow(Data),7] <- 0
         for (i in 8:(nrow(Data)-3)) {
@@ -80,15 +80,15 @@
         NuObsEvents<-sum(Data$ObservedRecharge)
         # Simulated recharge events during observation period
         Data$SimulatedRechargeEventsDuringObservationPeriod <- NA
-        for (i in which(Data$Date == dmy("01.07.2014")):which(Data$Date == dmy("01.07.2019"))) {
-          Data[i,8] <- ifelse(Data[i,4] == Data[i,7], Data[i,7], 
-                              ifelse(Data[i,7] == 1 && Data[(i+1),7] == 0 
-                                     && max(Data[(i-6):i,4]) == 0, -1, 0))
+        for (i in which(Data$Date==dmy("01.07.2014")):which(Data$Date==dmy("01.07.2019"))) {
+          Data[i,8] <- ifelse(Data[i,4]==Data[i,7], Data[i,7], 
+                              ifelse(Data[i,7]==1 && Data[(i+1),7]==0 
+                                     && max(Data[(i-6):i,4])==0, -1, 0))
         }
         # Number of simulated events
         NuSimEvents <- sum(Data$SimulatedRechargeEventsDuringObservationPeriod, na.rm = T)
         # Missmatches  (simulated but not observed events)
-        Data$Missmatches<- NA
+        Data$Missmatches <- NA
         for (i in which(Data$Date==dmy("01.07.2014")):which(Data$Date==dmy("01.07.2019"))) {
           Data[i,9] <- ifelse(Data[i,8] < 0, Data[i,8], 0)
         }
