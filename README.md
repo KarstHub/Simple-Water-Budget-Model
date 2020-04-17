@@ -14,7 +14,7 @@ Instructions regarding the R code for recharge time series simulation of the Low
 	    Download and install R studio from https://www.rstudio.com, Rstudio is also available as part of Anaconda distribution (https://www.anaconda.com). I
 
 
-3) Open the R file. Insert the working directory in line 32 to the direction of your folder. Run the R code.
+3) Open the R file. Insert the working directory in line 30 to the direction of your folder. Run the R code.
 
 4) Results of Macleay function in the R code:
 	• After running the Macleay function, numbers of observed and simulated events and numbers of the matches and missmatches are printed in the console.
